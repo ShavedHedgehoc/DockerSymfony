@@ -1,0 +1,7 @@
+{% include "base.html.twig" %}
+{% block body %}
+{{ knp_menu_render('main') }}
+
+<h1>Lots</h1>
+{{arr|raw}}
+{% endblock %}

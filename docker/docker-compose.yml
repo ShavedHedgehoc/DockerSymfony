@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  php-fpm:
+    build:
+      context: ./php-fpm
+    environment:
+      - APP_ENV:${APP_ENV}
+      - DATABASE_HOST:${DATABASE_HOST}
+      - DATABASE_NAME:${DATABASE_NAME}
+      - DATABASE_USER:${DATABASE_USER}
+      - DATABASE_PASSWORD:${DATABASE_PASSWORD}      
+    env_file:
+      - ./.env
+    volumes:
+      - ../src:/var/www
+  
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ../src:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+      - ./logs:/var/log
+    depends_on:
+      - php-fpm
+    ports:
+      - "80:80" 
+

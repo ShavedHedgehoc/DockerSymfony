@@ -1,0 +1,12 @@
+{{form_start(form)}}
+{{ form_label(form.batchname, null, {
+                    'label': 'Поиск по номеру варки',
+                    'label_attr':{'class':'label'}
+                }) }}
+{{form_widget(form.batchname, {
+                    'attr':{'class':'forminput'}
+                }) }}
+{{form_widget(form.send, {
+                    'attr':{'class':'buttonsubmit'}
+                }) }}
+{{form_end(form)}}

@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<div id="menu">{{ knp_menu_render('main') }}</div>
+	<div class="row">
+		<div class="col-20">
+			{% include "_form.html.twig" %}
+		</div>
+        <div class="col-75"></div>
+	</div>
+
+	<div
+		class='table'>
+		{# boil table #}
+		{% if boilTableData %}
+			<h2>Boils</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>№</th>
+						<th>Код 1С</th>
+						<th>Наименование</th>
+						<th>План</th>
+						<th>Факт</th>
+					</tr>
+				</thead>
+				{% set count=1 %}
+				{% for row in boilTableData %}
+					<tr>
+						<td>{{count}}</td>
+						<td>{{row.ProductId}}</td>
+						<td>{{row.ProductName}}</td>
+						<td>{{row.Quantity}}</td>
+						<td>{{row.Total}}</td>
+					</tr>
+					{% set count=count+1 %}
+				{% endfor %}
+			</table>
+		{% endif %}
+	</div>
+	<div
+		class='table'>
+		{# weight table #}
+		{% if weightTableData %}
+			<h2>Weightings</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>№</th>
+						<th>Код 1С</th>
+						<th>Наименование</th>
+						<th>Квазипартия</th>
+						<th>Взвесил</th>
+						<th>Количество</th>
+						<th>Дата</th>
+						<th>Время</th>
+						<th>Действия</th>
+					</tr>
+				</thead>
+				{% set count=1 %}
+				{% for row in weightTableData %}
+					<tr>
+						<td>{{count}}</td>
+						<td>{{row.ProductId}}</td>
+						<td>{{row.ProductName}}</td>
+						<td>{{row.LotName}}</td>
+						<td>{{row.AuthorName}}</td>
+						<td>{{row.Quantity}}</td>
+						<td>{{row.CreateDate|date('d-m-Y', timezone="Europe/Moscow")}}</td>
+						<td>{{row.CreateDate|date('H:m:s', timezone="Europe/Moscow")}}</td>
+						<td>
+							<button onclick="location.href='{{path('product',{'productid':row.ProductId})}}'" type="button">Сырье</button>
+							<button onclick="location.href='{{path('lot',{'lotname':row.LotName})}}'" type="button">Квази</button>
+						</td>
+					</tr>
+					{% set count=count+1 %}
+				{% endfor %}
+			</table>
+		{% endif %}
+	</div>
+	<div
+		class='table'>
+		{# load table #}
+		{% if loadTableData %}
+			<h2>Loads</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>№</th>
+						<th>Код 1С</th>
+						<th>Наименование</th>
+						<th>Квазипартия</th>
+						<th>Загрузил</th>
+						<th>Дата</th>
+						<th>Время</th>
+						<th>Действия</th>
+					</tr>
+				</thead>
+				{% set count=1 %}
+				{% for row in loadTableData %}
+					<tr>
+						<td>{{count}}</td>
+						<td>{{row.ProductId}}</td>
+						<td>{{row.ProductName}}</td>
+						<td>{{row.LotName}}</td>
+						<td>{{row.AuthorName}}</td>
+						<td>{{row.CreateDate|date('d-m-Y', timezone="Europe/Moscow")}}</td>
+						<td>{{row.CreateDate|date('H:m:s', timezone="Europe/Moscow")}}</td>
+						<td>
+							<button onclick="location.href='{{path('product',{'productid':row.ProductId})}}'" type="button">Сырье</button>
+							<button onclick="location.href='{{path('lot',{'lotname':row.LotName})}}'" type="button">Квази</button>
+						</td>
+					</tr>
+					{% set count=count+1 %}
+				{% endfor %}
+			</table>
+		{% endif %}
+	</div>
+
+{% endblock %}
