@@ -1,4 +1,5 @@
 FROM php:8.0-fpm
+
 RUN apt-get update && apt-get install -y unixodbc-dev
 RUN pecl install sqlsrv pdo_sqlsrv \    
     && docker-php-ext-enable pdo_sqlsrv
@@ -11,24 +12,17 @@ RUN apt-get update
 RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-RUN apt-get install -y git zip
+
+
+
 WORKDIR /var/www
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir /usr/bin --filename composer
+
+# RUN set -ex \
+#     &&{ \
+#     echo 'clear_env = no'; \
+#     }
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY . /var/www
-RUN usermod -u 1000 www-data
-RUN mkdir -p var/cache var/log
-# RUN apt-get install -y coreutils yarn
-# RUN composer install
-
-# RUN yarn dev
-# RUN chown -R www-data:www-data var/cache
-# RUN chown -R www-data:www-data var/log
- 
-# COPY composer.json /var/www/composer.json
-
-# RUN composer install -o
-# RUN composer update
-CMD php-fpm
+RUN apt-get install composer installCMD composer install ; php-fpm
 EXPOSE 9000

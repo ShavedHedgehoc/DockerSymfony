@@ -11,10 +11,9 @@ services:
       - DATABASE_USER:${DATABASE_USER}
       - DATABASE_PASSWORD:${DATABASE_PASSWORD}      
     env_file:
-      - ./.env
+      - ../src/.env
     volumes:
-      - ../src:/var/www
-  
+      - ../src:/var/www  
   nginx:
     build:
       context: ./nginx
