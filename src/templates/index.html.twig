@@ -1,5 +1,7 @@
 {% include "base.html.twig" %}
-{% block body %}
-{{ knp_menu_render('main')}}
-<h1>Main</h1>
+{% block navbar %}
+	{{ knp_menu_render('main',{'template':'extended_knp_menu.html.twig'}) }}
 {% endblock %}
+{% block body %}
+	Добро пожаловать в систему прослеживаемости!
+</h1>{% endblock %}

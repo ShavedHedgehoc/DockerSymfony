@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 {% block body %}
-	<div id="menu">{{ knp_menu_render('main') }}</div>
+	<div class="navbar">
+		{{ knp_menu_render('main',{'template':'extended_knp_menu.html.twig'}) }}
+	</div>
+	<main class="container">
 	<div class="row">
 		<div class="col-20">
 			{% include "_form.html.twig" %}
@@ -115,5 +118,5 @@
 			</table>
 		{% endif %}
 	</div>
-
+</main>
 {% endblock %}

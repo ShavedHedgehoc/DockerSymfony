@@ -1,5 +1,7 @@
 {% include "base.html.twig" %}
 {% block body %}
-{{ knp_menu_render('main') }}
+<div class="navbar">
+		{{ knp_menu_render('main',{'template':'extended_knp_menu.html.twig'}) }}
+	</div>
 <h1>Checks</h1>
 {% endblock %}
